@@ -1,6 +1,13 @@
 import Input from '../components/Input';
+import useInput from '../hook/use-input';
 
 const Login = () => {
+  const emailInput = useInput((val: string) => val.includes('@') && val.length > 4);
+  const passwordInput = useInput((val: string) => val.length >= 6 && val.length <= 16);
+  let formIsValid = false;
+  if (emailInput.isValid && passwordInput.isValid) {
+    formIsValid = true;
+  }
   return (
     <div className='min-h-screen bg-base-100 flex justify-center items-center'>
       <div className='absolute w-60 h-60 rounded-xl bg-primary -top-5 -left-16 z-0 transform rotate-45 hidden md:block'></div>
@@ -13,11 +20,36 @@ const Login = () => {
           </p>
         </div>
         <div className='space-y-4'>
-          <Input name='Email' placeholder='123@ex.com' type='text' />
-          <Input name='Password' placeholder='Password' type='password' />
+          <Input
+            name='Email'
+            placeholder='123@ex.com'
+            type='text'
+            value={emailInput.value}
+            onChange={emailInput.inputChangeHandler}
+            onBlur={emailInput.inputBlurHandler}
+            className={emailInput.hasError ? 'border-rose-500' : ''}
+          />
+          {emailInput.hasError && (
+            <p className='text-xs font-medium mt-1 text-rose-500'>Email must be valid (contains @).</p>
+          )}
+          <Input
+            name='Password'
+            placeholder='Password'
+            type='password'
+            value={passwordInput.value}
+            onChange={passwordInput.inputChangeHandler}
+            onBlur={passwordInput.inputBlurHandler}
+            className={passwordInput.hasError ? 'border-rose-500' : ''}
+          />
+          {passwordInput.hasError && (
+            <p className='text-xs font-medium mt-1 text-rose-500'>Password must be between 6 and 16 characters.</p>
+          )}
         </div>
         <div className='text-center mt-6'>
-          <button className='py-3 w-64 text-xl text-white bg-primary rounded-lg transition-colors hover:bg-primary-focus'>
+          <button
+            className='py-3 w-full text-xl text-white cursor-pointer bg-primary rounded-lg transition-colors hover:bg-primary-focus disabled:cursor-default disabled:bg-primary disabled:bg-opacity-80'
+            disabled={!formIsValid}
+          >
             Login
           </button>
           <p className='mt-4 text-sm'>
