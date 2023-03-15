@@ -10,9 +10,14 @@ const GetStarted = () => {
           <p className='mb-5 2xl:text-lg'>
             Start sharing your thoughts with awesome people and keep up with our updates and small blog website.
           </p>
-          <Link className='btn btn-primary 2xl:px-8  2xl:text-lg' to='/signup'>
+          <Link className='btn btn-primary 2xl:px-8 2xl:w-80 w-56  2xl:text-lg' to='/signup'>
             Get Started
           </Link>
+          <div>
+            <Link className='btn 2xl:px-8 2xl:text-lg mt-6 outline btn-ghost' to='/login'>
+              Already have an account?
+            </Link>
+          </div>
         </div>
       </div>
     </div>
