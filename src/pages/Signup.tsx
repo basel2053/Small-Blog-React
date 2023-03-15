@@ -3,7 +3,7 @@ import Input from '../components/Input';
 import Square from '../components/Square';
 import useInput from '../hook/use-input';
 import useHttp from '../hook/use-http';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Modal from '../components/Modal/Modal';
 
 const Signup = () => {
@@ -20,14 +20,15 @@ const Signup = () => {
     formIsValid = true;
   }
 
-  const registerHandler = async () => {
+  const registerHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const user = {
       email: emailInput.value,
       password: passwordInput.value,
       confirmPassword: confirmInput.value,
       name: nameInput.value ? nameInput.value : undefined,
     };
-    const { errors } = await useHttp(user, 'users/signup', 'POST');
+    const { errors } = await useHttp('users/signup', 'POST', user);
     if (errors) {
       setSubmitMsg(`Error: ${(errors as IValidationError).msg}`);
     } else {
@@ -60,7 +61,7 @@ const Signup = () => {
                 <p className='w-full text-4xl font-medium text-center leading-snug font-serif'>
                   Sign up for an account
                 </p>
-                <div className='w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8'>
+                <form className='w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8' onSubmit={registerHandler}>
                   <Input
                     name='Email'
                     placeholder='123@ex.com'
@@ -115,12 +116,11 @@ const Signup = () => {
                       className='w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center cursor-pointer text-white bg-primary
                   rounded-lg transition duration-200 hover:bg-primary-focus disabled:bg-primary disabled:bg-opacity-70 disabled:cursor-default'
                       disabled={!formIsValid}
-                      onClick={registerHandler}
                     >
                       Submit
                     </button>
                   </div>
-                </div>
+                </form>
               </div>
               <Square className='top-0 left-0 -mt-12 -ml-12 text-yellow-300' />
               <Square className='bottom-0 right-0 -mb-12 -mr-12 text-primary' />

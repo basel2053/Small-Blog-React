@@ -1,13 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
-import { useContext } from 'react';
 import GetStarted from './pages/GetStarted';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import BlogContext, { BlogContextProvider } from './store/blog-context';
+import { BlogContextProvider } from './store/blog-context';
 import Home from './pages/Home';
+import useAuth from './hook/use-auth';
+import RequireAuth from './components/RequireAuth';
+import PresistenceLogin from './token/PresistenceLogin';
 
 const App = () => {
-  const { isLogged } = useContext(BlogContext);
+  const { isLogged } = useAuth();
 
   return (
     <BlogContextProvider>
@@ -15,6 +17,9 @@ const App = () => {
         <Route path='/' element={isLogged ? <Home /> : <GetStarted />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
+
+        {/* HERE  put our protected routes  inside presistenceLogin and requireAuth*/}
+        <Route element={<PresistenceLogin />}>{/* <Route element={<RequireAuth/>}></Route> */}</Route>
       </Routes>
     </BlogContextProvider>
   );

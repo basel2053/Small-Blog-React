@@ -18,6 +18,7 @@ const Input = (props: {
         {props.name}
       </p>
       <input
+        autoComplete={props.name == 'Email' ? 'off' : 'on'}
         placeholder={props.placeholder}
         type={props.type}
         value={props.value}

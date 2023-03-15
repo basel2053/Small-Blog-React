@@ -1,34 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { IPost } from '../interface/post';
+import { IUser } from '../interface/user';
 
 const BlogContext = React.createContext({
-  isLogged: false,
+  isLogged: undefined as Partial<IUser> | undefined,
   posts: [] as IPost[],
-  onLogin: (data: { token: string; userId: string }) => {},
-  onLogout: () => {},
+  setIsLoggedIn: '' as any,
 });
 
 export const BlogContextProvider = (props: { children: React.ReactNode }) => {
-  const [isLogged, setIsLoggedIn] = useState<boolean>(false);
+  const [isLogged, setIsLoggedIn] = useState<Partial<IUser> | undefined>();
   const [posts, setPosts] = useState<IPost[]>([]);
-  useEffect(() => {
-    const getLogged = localStorage.getItem('isLogged');
-    if (getLogged) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-  const logoutHandler = () => {
-    setIsLoggedIn(false);
-  };
-  const loginHandler = (data: { token: string; userId: string }) => {
-    setIsLoggedIn(true);
-  };
 
-  return (
-    <BlogContext.Provider value={{ isLogged, posts, onLogin: loginHandler, onLogout: logoutHandler }}>
-      {props.children}
-    </BlogContext.Provider>
-  );
+  return <BlogContext.Provider value={{ isLogged, posts, setIsLoggedIn }}>{props.children}</BlogContext.Provider>;
 };
 
 export default BlogContext;
