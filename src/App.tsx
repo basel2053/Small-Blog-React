@@ -14,7 +14,7 @@ const App = () => {
 	return (
 		<Routes>
 			<Route element={<PresistenceLogin />}>
-				<Route path='/' element={isLogged?.accessToken ? <Home /> : <GetStarted />} />
+				<Route path='/' element={!isLogged?.accessToken ? <Home /> : <GetStarted />} />
 			</Route>
 			<Route path='/signup' element={<Signup />} />
 			<Route path='/login' element={<Login />} />
