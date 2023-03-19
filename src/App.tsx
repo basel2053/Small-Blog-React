@@ -6,23 +6,28 @@ import Home from './pages/Home';
 import useAuth from './hook/use-auth';
 import RequireAuth from './components/RequireAuth';
 import PresistenceLogin from './token/PresistenceLogin';
+import PostDetails from './components/Posts/PostDetails';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
 
 const App = () => {
-	const { isLogged } = useAuth();
-	console.log(isLogged);
+  const { isLogged } = useAuth();
+  console.log(isLogged);
 
-	return (
-		<Routes>
-			<Route element={<PresistenceLogin />}>
-				<Route path='/' element={!isLogged?.accessToken ? <Home /> : <GetStarted />} />
-			</Route>
-			<Route path='/signup' element={<Signup />} />
-			<Route path='/login' element={<Login />} />
+  return (
+    <Routes>
+      <Route element={<PresistenceLogin />}>
+        <Route path='/' element={!isLogged?.accessToken ? <Home /> : <GetStarted />} />
+        {/* require auth here */}
+        <Route path='/posts/:id' element={<PostDetails />} />
+      </Route>
+      <Route path='/signup' element={<Signup />} />
+      <Route path='/login' element={<Login />} />
 
-			{/* HERE  put our protected routes  inside presistenceLogin and requireAuth*/}
-			{/* <Route element={<PresistenceLogin />}><Route element={<RequireAuth/>}></Route></Route> */}
-		</Routes>
-	);
+      {/* HERE  put our protected routes  inside presistenceLogin and requireAuth*/}
+      {/* <Route element={<PresistenceLogin />}><Route element={<RequireAuth/>}></Route></Route> */}
+    </Routes>
+  );
 };
 
 export default App;
