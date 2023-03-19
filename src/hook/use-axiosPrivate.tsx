@@ -20,20 +20,24 @@ const useAxiosPrivate = () => {
       err => Promise.reject(err)
     );
 
+    interface RetryConfig extends InternalAxiosRequestConfig {
+      sent?: boolean;
+    }
+
     const resInterceptor = axiosPrivate.interceptors.response.use(
       res => res,
       async (err: AxiosError) => {
         // ? example to a failure here could be because token expired or something
-        const prevRequest = err?.config; // getting prev request from config
+        const prevRequest: RetryConfig | undefined = err?.config; // getting prev request from config
+        if (!prevRequest) {
+          return Promise.reject(err);
+        }
+        // const prevRequest = err?.config as RetryConfig; // HERE  alternative if wanna skip if
         // ! we might need a custom property for sent (to check if we sent request once, otherwise we might get into infinite loop)
-        //@ts-ignore
         if (err?.response?.status === 403 && !prevRequest?.sent) {
-          //@ts-ignore
-          prevRequest?.sent = true;
+          prevRequest.sent = true;
           const newAccessToken = await refresh();
-          //@ts-ignore
-          prevRequest?.headers['Authorization'] = `Bearer ${newAccessToken}`;
-          //@ts-ignore
+          prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
           return axiosPrivate(prevRequest);
         }
         return Promise.reject(err);
