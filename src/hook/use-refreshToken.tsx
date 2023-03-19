@@ -1,13 +1,13 @@
 import { IUser } from '../interface/user';
-import useAuth from './use-auth';
+import useBlogContext from './use-blogContext';
 import useHttp from './use-http';
 
 const useRefreshToken = () => {
-  const { setIsLoggedIn } = useAuth();
+  const { setUser } = useBlogContext();
 
   const refresh = async () => {
     const { data, errors } = await useHttp('token/refresh', 'GET');
-    setIsLoggedIn((prev: Partial<IUser> | undefined) => ({ ...prev, accessToken: data?.accessToken }));
+    setUser((prev: Partial<IUser> | undefined) => ({ ...prev, accessToken: data?.accessToken }));
     return data?.accessToken;
   };
   return refresh;

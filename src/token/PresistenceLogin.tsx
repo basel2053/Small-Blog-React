@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import useRefreshToken from '../hook/use-refreshToken';
-import useAuth from '../hook/use-auth';
+import useAuth from '../hook/use-blogContext';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 
 const PresistenceLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { isLogged } = useAuth();
+  const { user } = useAuth();
   const refresh = useRefreshToken();
 
   useEffect(() => {
@@ -21,26 +21,14 @@ const PresistenceLogin = () => {
         isMounted && setIsLoading(false);
       }
     };
-    !isLogged?.accessToken ? verifyRefreshToken() : setIsLoading(false);
+    !user?.accessToken ? verifyRefreshToken() : setIsLoading(false);
 
     return () => {
       isMounted = false;
     };
   }, []);
 
-  return (
-    <>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          <Navbar />
-          <Outlet />
-          <Footer />
-        </>
-      )}
-    </>
-  );
+  return <>{isLoading ? <p>Loading...</p> : <Outlet />}</>;
 };
 
 export default PresistenceLogin;

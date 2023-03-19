@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import Input from '../components/Input';
 import useHttp from '../hook/use-http';
 import useInput from '../hook/use-input';
-import useAuth from '../hook/use-auth';
+import useBlogContext from '../hook/use-blogContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const { setIsLoggedIn } = useAuth();
+  const { setUser } = useBlogContext();
 
   const naviage = useNavigate();
   const location = useLocation();
@@ -30,7 +30,7 @@ const Login = () => {
     if (errors) {
       setLoginMsg(`Error: ${(errors as IValidationError).msg || errors}`);
     } else {
-      setIsLoggedIn(data);
+      setUser(data);
       naviage(from, { replace: true });
     }
   };

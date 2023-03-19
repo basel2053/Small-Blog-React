@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ModalOverlay = () => {
   const [count, setCount] = useState(4);
@@ -23,7 +24,9 @@ const ModalOverlay = () => {
         <h2 className='card-title'>Account Created!</h2>
         <p className='my-4'>Your account was created sucessfully, you will be redirected in {count}...</p>
         <div className='card-actions justify-end'>
-          <button className='btn btn-primary'>Login Now</button>
+          <Link className='btn btn-primary' to='/login'>
+            Login Now
+          </Link>
         </div>
       </div>
     </div>

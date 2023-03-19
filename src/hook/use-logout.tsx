@@ -1,11 +1,11 @@
-import useAuth from './use-auth';
+import useBlogContext from './use-blogContext';
 import useHttp from './use-http';
 
 const useLogout = () => {
-  const { setIsLoggedIn } = useAuth();
+  const { setUser } = useBlogContext();
 
   const logout = async () => {
-    setIsLoggedIn({});
+    setUser({});
     try {
       await useHttp('logout', 'GET');
     } catch (err) {

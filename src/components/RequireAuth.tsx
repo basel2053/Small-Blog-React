@@ -1,13 +1,23 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import useAuth from '../hook/use-auth';
+import useBlogContext from '../hook/use-blogContext';
+import Navbar from './layout/Navbar';
+import Footer from './layout/Footer';
 
 const RequireAuth = () => {
-  const { isLogged } = useAuth();
+  const { user } = useBlogContext();
   const location = useLocation();
 
   return (
     // ? protects all the childs component nested inside of it, IMPORTANT  we could also check for roles (pass it as parameter), maybe navigate to unauthorized page also
-    isLogged?.accessToken ? <Outlet /> : <Navigate to='/login' state={{ from: location }} replace />
+    user?.accessToken ? (
+      <>
+        <Navbar />
+        <Outlet />
+        <Footer />
+      </>
+    ) : (
+      <Navigate to='/login' state={{ from: location }} replace />
+    )
   );
 };
 

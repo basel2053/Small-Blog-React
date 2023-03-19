@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
 import { axiosPrivate } from '../api/axios';
-import useAuth from './use-auth';
+import useBlogContext from './use-blogContext';
 import useRefreshToken from './use-refreshToken';
 import { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 const useAxiosPrivate = () => {
   const refresh = useRefreshToken();
-  const { isLogged } = useAuth();
+  const { user } = useBlogContext();
 
   useEffect(() => {
     const reqInterceptor = axiosPrivate.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
         // if no auth header then its the first attempt
         if (config.headers && !config.headers['Authorization']) {
-          config.headers['Authorization'] = `Bearer ${isLogged?.accessToken}`;
+          config.headers['Authorization'] = `Bearer ${user?.accessToken}`;
         }
         return config;
       },
@@ -46,7 +46,7 @@ const useAxiosPrivate = () => {
       axiosPrivate.interceptors.response.eject(resInterceptor);
       axiosPrivate.interceptors.request.eject(reqInterceptor);
     };
-  }, [isLogged, refresh]);
+  }, [user, refresh]);
 
   return axiosPrivate;
 };

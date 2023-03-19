@@ -55,9 +55,9 @@ const Post = () => {
                 alt='Avatar'
               />
               <div className='flex flex-col mx-2'>
-                <a href='' className='font-semibold text-gray-700 hover:underline'>
+                <Link to='/profile/4' className='font-semibold text-gray-700 hover:underline'>
                   Fajrian Aidil Pratama
-                </a>
+                </Link>
                 <span className='mx-1 text-xs text-gray-600'>28 Sep 2020</span>
               </div>
             </div>
