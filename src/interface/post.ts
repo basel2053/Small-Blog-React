@@ -3,5 +3,8 @@ export interface IPost {
   title: string;
   description: string;
   image: string;
-  userId: number;
+  author: string;
+  readtime: number;
+  createdat: string;
+  field: string;
 }
