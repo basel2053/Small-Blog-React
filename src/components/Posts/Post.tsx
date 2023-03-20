@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
 import { IPost } from '../../interface/post';
 import { baseURL } from '../../api/axios';
+import EditIcon from '../icons/EditIcon';
+import TrashIcon from '../icons/TrashIcon';
+import useBlogContext from '../../hook/use-blogContext';
 
 const Post = (props: IPost) => {
+  const { user } = useBlogContext();
+
   return (
     <div className='transition-all duration-150 flex  w-full px-4 py-6 md:w-1/2 lg:w-[32%] '>
       <div className='flex flex-col items-stretch min-h-full pb-4 mb-6 transition-all duration-150 bg-white rounded-lg shadow-lg hover:shadow-2xl'>
@@ -57,11 +62,20 @@ const Post = (props: IPost) => {
                 alt='Avatar'
               />
               <div className='flex flex-col mx-2'>
-                <Link to='/profile/4' className='font-semibold text-gray-700 hover:underline'>
+                <Link
+                  to={`/profile/${props.author}`}
+                  className='font-semibold text-gray-700 hover:underline capitalize'
+                >
                   {props.author}
                 </Link>
                 <span className='mx-1 text-xs text-gray-600'>{props.createdat}</span>
               </div>
+              {props.author === user?.name && (
+                <div className='ml-auto flex gap-4'>
+                  <EditIcon />
+                  <TrashIcon />
+                </div>
+              )}
             </div>
           </div>
         </section>

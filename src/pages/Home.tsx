@@ -26,7 +26,7 @@ const Home = () => {
   // };
   // NOTE  above is logout logic don't forget it
   const privateHttp = useAxiosPrivate();
-  const { setPosts } = useBlogContext();
+  const { posts, setPosts } = useBlogContext();
   const [searchParams, setSearchParams] = useSearchParams();
   const [pagination, setPagination] = useState<IPagination>({ page: 1, next: false, prev: false, numberOfPages: 1 });
   const [count, setCount] = useState<number>(0);
@@ -50,7 +50,7 @@ const Home = () => {
     <>
       <Hero />
       <Search />
-      <PostWrapper />
+      <PostWrapper posts={posts} />
       <div className='flex flex-col items-center'>
         <Stat postsCount={count} />
         {pagination.numberOfPages > 1 && <Pagination {...pagination} onPaginate={onPaginate} />}
