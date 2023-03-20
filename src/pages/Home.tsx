@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import useLogout from '../hook/use-logout';
 import PostWrapper from '../components/Posts/PostWrapper';
 import Pagination from '../components/pagination';
@@ -30,9 +30,10 @@ const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [pagination, setPagination] = useState<IPagination>({ page: 1, next: false, prev: false, numberOfPages: 1 });
   const [count, setCount] = useState<number>(0);
+  const params = useLocation().search;
   useEffect(() => {
     const getAllPosts = async () => {
-      const { data } = await privateHttp.get(`filter?page=${searchParams.get('page')}`);
+      const { data } = await privateHttp.get(`filter${params}`);
       setPosts(data.posts);
       setCount(data.pagination.postsCount);
       setPagination(data.pagination);
@@ -41,7 +42,8 @@ const Home = () => {
   }, [searchParams]);
 
   const onPaginate = async (page: number) => {
-    setSearchParams({ page: page + '' });
+    searchParams.set('page', page + '');
+    setSearchParams(searchParams);
   };
 
   return (

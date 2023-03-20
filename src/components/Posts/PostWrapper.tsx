@@ -8,7 +8,7 @@ const PostWrapper = () => {
       {posts.length > 0 ? (
         posts.map(p => <Post key={p.id} {...p} />)
       ) : (
-        <h2 className='font-medium text-xl text-gray-700'>There is no posts yet...</h2>
+        <h2 className='font-medium text-xl text-gray-700'>There is no results found...</h2>
       )}
     </section>
   );

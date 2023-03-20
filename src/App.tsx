@@ -18,7 +18,7 @@ const App = () => {
         <Route element={<RequireAuth />}>
           {user?.accessToken && <Route path='/' element={<Home />} />}
           <Route path='/posts/:id' element={<PostDetails />} />
-          <Route path='/profile/:id' element={<Profile />} />
+          <Route path='/profile/:author' element={<Profile />} />
         </Route>
         <Route path='/' element={<GetStarted />} />
       </Route>

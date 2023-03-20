@@ -37,7 +37,7 @@ const Post = (props: IPost) => {
         </div>
         <hr className='border-gray-300' />
         <div className='flex flex-wrap items-center flex-1 px-4 py-1 text-center mx-auto'>
-          <Link to='/posts/2' className='hover:underline'>
+          <Link to={`/posts/${props.id}`} className='hover:underline'>
             <h2 className='text-2xl font-bold tracking-normal text-gray-800'>{props.title}</h2>
           </Link>
         </div>
