@@ -1,5 +1,4 @@
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import useLogout from '../hook/use-logout';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import PostWrapper from '../components/Posts/PostWrapper';
 import Pagination from '../components/pagination';
 import Stat from '../components/Stat';
@@ -18,14 +17,6 @@ export interface IPagination {
 }
 
 const Home = () => {
-  // const navigate = useNavigate();
-  // const logout = useLogout();
-  // const signOut = async () => {
-  //   // ? apply it to the signout button
-  //   await logout();
-  //   navigate('/');
-  // };
-  // NOTE  above is logout logic don't forget it
   const privateHttp = useAxiosPrivate();
   const { posts, setPosts } = useBlogContext();
   const [searchParams, setSearchParams] = useSearchParams();

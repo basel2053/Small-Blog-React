@@ -7,7 +7,7 @@ const PostWrapper = (props: { posts: IPost[] }) => {
       {props.posts.length > 0 ? (
         props.posts.map(p => <Post key={p.id} {...p} />)
       ) : (
-        <h2 className='font-medium text-xl text-gray-700'>There is no results found...</h2>
+        <h2 className='font-medium text-xl text-gray-700 mb-[4.3rem]'>There is no results found...</h2>
       )}
     </section>
   );

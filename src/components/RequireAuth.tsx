@@ -11,7 +11,7 @@ const RequireAuth = () => {
     // ? protects all the childs component nested inside of it, IMPORTANT  we could also check for roles (pass it as parameter), maybe navigate to unauthorized page also
     user?.accessToken ? (
       <>
-        <Navbar />
+        <Navbar user={user?.name} />
         <Outlet />
         <Footer />
       </>

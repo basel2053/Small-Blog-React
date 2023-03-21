@@ -9,6 +9,8 @@ import PresistenceLogin from './token/PresistenceLogin';
 import PostDetails from './components/Posts/PostDetails';
 import Profile from './components/Profile/Profile';
 import EditPost from './components/Edit-Post/EditPost';
+import Error404 from './components/Error404';
+import Forgot from './pages/Forgot';
 
 const App = () => {
   const { user } = useBlogContext();
@@ -26,6 +28,8 @@ const App = () => {
       </Route>
       <Route path='/signup' element={<Signup />} />
       <Route path='/login' element={<Login />} />
+      <Route path='/forgot' element={<Forgot />} />
+      <Route path='*' element={<Error404 />} />
 
       {/* HERE  put our protected routes  inside presistenceLogin and requireAuth*/}
       {/* <Route element={<PresistenceLogin />}></Route> */}

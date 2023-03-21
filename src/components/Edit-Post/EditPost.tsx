@@ -63,7 +63,6 @@ const EditPost = () => {
     formData.append('field', data.field);
     if (data.image) formData.append('image', data.image[0]);
     formData.append('description', data.description);
-
     reset({ title: '', description: '' });
     id ? await privateHttp.patch(`posts/${id}`, formData) : await privateHttp.post(`posts`, formData);
     setTimeout(() => {

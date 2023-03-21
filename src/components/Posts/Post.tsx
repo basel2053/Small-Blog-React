@@ -4,6 +4,20 @@ import { baseURL } from '../../api/axios';
 import EditIcon from '../icons/EditIcon';
 import TrashIcon from '../icons/TrashIcon';
 import useBlogContext from '../../hook/use-blogContext';
+import UserAvatar from '../UserAvatar';
+
+const colorify: any = {
+  'Web Programming': 'text-primary-focus',
+  'Embedded System': 'text-teal-500',
+  'Cyber Security': 'text-rose-500',
+  'Mobile Development': 'text-indigo-500',
+  DevOps: 'text-amber-500',
+  'Cloud Architect': 'text-sky-500',
+  'Software Testing': 'text-lime-500',
+  'Data Analytics & Visualization': 'text-purple-500',
+  'UI/UX': 'text-pink-500',
+  'System Admin': 'text-orange-500',
+};
 
 const Post = (props: IPost) => {
   const { user } = useBlogContext();
@@ -19,7 +33,7 @@ const Post = (props: IPost) => {
           />
         </div>
         <div className='flex items-center justify-between px-4 py-2 overflow-hidden'>
-          <span className='text-xs font-medium text-primary-focus uppercase'>{props.field}</span>
+          <span className={`text-xs font-medium ${colorify[props.field]} uppercase`}>{props.field}</span>
           <div className='flex flex-row items-center'>
             <div className='text-xs font-medium text-gray-500 flex flex-row items-center mr-2'>
               <svg
@@ -56,11 +70,9 @@ const Post = (props: IPost) => {
         <section className='px-4 py-2 mt-2'>
           <div className='flex items-center justify-between'>
             <div className='flex items-center flex-1'>
-              <img
-                className='object-cover h-10 rounded-full'
-                src='https://thumbs.dreamstime.com/b/default-avatar-photo-placeholder-profile-icon-eps-file-easy-to-edit-default-avatar-photo-placeholder-profile-icon-124557887.jpg'
-                alt='Avatar'
-              />
+              <div className='mask mask-circle'>
+                <UserAvatar name={props.author} size={40} />
+              </div>
               <div className='flex flex-col mx-2'>
                 <Link
                   to={`/profile/${props.author}`}

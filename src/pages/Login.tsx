@@ -3,7 +3,7 @@ import Input from '../components/Input';
 import useHttp from '../hook/use-http';
 import useInput from '../hook/use-input';
 import useBlogContext from '../hook/use-blogContext';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const { setUser } = useBlogContext();
@@ -80,7 +80,10 @@ const Login = () => {
             Login
           </button>
           <p className='mt-4 text-sm'>
-            Forgot your password? <span className='underline cursor-pointer'> forget password</span>
+            Forgot your password?
+            <Link to='/forgot' className='underline cursor-pointer'>
+              forget password
+            </Link>
           </p>
         </div>
       </form>
