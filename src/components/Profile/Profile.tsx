@@ -3,21 +3,18 @@ import ProfilePicture from './ProfilePicture';
 import useAxiosPrivate from '../../hook/use-axiosPrivate';
 import { useEffect, useState } from 'react';
 import PostWrapper from '../Posts/PostWrapper';
-import { IPost } from '../../interface/post';
-
-interface IUserPosts extends IPost {
-  name: string;
-}
+import useBlogContext from '../../hook/use-blogContext';
 
 const Profile = () => {
   const { author } = useParams();
   const privateHttp = useAxiosPrivate();
-  const [authorInfo, setAuthorInfo] = useState<IUserPosts[]>([]);
+  // const [authorInfo, setAuthorInfo] = useState<IUserPosts[]>([]);
+  const { posts, setPosts } = useBlogContext();
 
   useEffect(() => {
     const getPost = async () => {
       const { data } = await privateHttp.get(`users/${author}`);
-      setAuthorInfo(data.author);
+      setPosts(data.author);
     };
     getPost();
   }, []);
@@ -26,7 +23,7 @@ const Profile = () => {
     <>
       <div className='m-auto border-2 rounded-xl shadow-md w-11/12 sm:w-2/3 md:w-1/2 xl:w-1/3 text-center my-10'>
         <ProfilePicture />
-        <h1 className='text-3xl capitalize font-bold mb-6'>{authorInfo[0]?.name}</h1>
+        <h1 className='text-3xl capitalize font-bold mb-6'>{posts[0]?.author}</h1>
         <p className='text-gray-500 mb-6 leading-6 px-4'>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis nesciunt animi fugit vitae. Ratione,
           ullam.
@@ -52,9 +49,9 @@ const Profile = () => {
       <div className='mx-14'>
         <hr className='mb-6' />
         <h2 className='text-3xl  font-bold mb-6'>
-          Lastest Posts by <span className='capitalize'>{authorInfo[0]?.name}</span>
+          Lastest Posts by <span className='capitalize'>{posts[0]?.author}</span>
         </h2>
-        <PostWrapper posts={authorInfo} />
+        <PostWrapper posts={posts} />
       </div>
     </>
   );

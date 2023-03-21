@@ -8,6 +8,7 @@ import Search from '../components/Search';
 import useAxiosPrivate from '../hook/use-axiosPrivate';
 import useBlogContext from '../hook/use-blogContext';
 import { useEffect, useState } from 'react';
+import AddPostButton from '../components/Edit-Post/AddPostButton';
 
 export interface IPagination {
   page: number;
@@ -55,6 +56,7 @@ const Home = () => {
         <Stat postsCount={count} />
         {pagination.numberOfPages > 1 && <Pagination {...pagination} onPaginate={onPaginate} />}
       </div>
+      <AddPostButton />
     </>
   );
 };

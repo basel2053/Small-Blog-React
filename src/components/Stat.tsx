@@ -1,6 +1,6 @@
 const Stat = (props: { postsCount: number }) => {
   return (
-    <div className='stats shadow'>
+    <div className='stats shadow mb-4'>
       <div className='stat'>
         <div className='stat-figure text-primary'>
           <svg

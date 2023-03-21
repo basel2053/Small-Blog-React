@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { IPost } from '../interface/post';
 import { IUser } from '../interface/user';
 

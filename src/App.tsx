@@ -8,6 +8,7 @@ import RequireAuth from './components/RequireAuth';
 import PresistenceLogin from './token/PresistenceLogin';
 import PostDetails from './components/Posts/PostDetails';
 import Profile from './components/Profile/Profile';
+import EditPost from './components/Edit-Post/EditPost';
 
 const App = () => {
   const { user } = useBlogContext();
@@ -19,6 +20,7 @@ const App = () => {
           {user?.accessToken && <Route path='/' element={<Home />} />}
           <Route path='/posts/:id' element={<PostDetails />} />
           <Route path='/profile/:author' element={<Profile />} />
+          <Route path='/edit-post' element={<EditPost />} />
         </Route>
         <Route path='/' element={<GetStarted />} />
       </Route>

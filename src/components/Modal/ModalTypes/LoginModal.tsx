@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const ModalOverlay = () => {
+const LoginModal = () => {
   const [count, setCount] = useState(4);
 
   useEffect(() => {
@@ -16,7 +16,6 @@ const ModalOverlay = () => {
       clearInterval(interval);
     };
   }, [count]);
-  console.log(count);
 
   return (
     <div className='card fixed z-30 m-auto inset-x-0 top-[30%] w-1/3 bg-base-100 shadow-xl'>
@@ -33,4 +32,4 @@ const ModalOverlay = () => {
   );
 };
 
-export default ModalOverlay;
+export default LoginModal;

@@ -5,7 +5,7 @@ import useInput from '../hook/use-input';
 import useHttp from '../hook/use-http';
 import React, { useState } from 'react';
 import Modal from '../components/Modal/Modal';
-import ModalOverlay from '../components/Modal/ModalOverlay';
+import LoginModal from '../components/Modal/ModalTypes/LoginModal';
 
 const Signup = () => {
   const [submitMsg, setSubmitMsg] = useState('');
@@ -135,7 +135,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
-      {showModal && <Modal children={<ModalOverlay />} />}
+      {showModal && <Modal children={<LoginModal />} />}
     </>
   );
 };

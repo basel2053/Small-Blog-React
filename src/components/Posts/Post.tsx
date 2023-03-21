@@ -72,8 +72,8 @@ const Post = (props: IPost) => {
               </div>
               {props.author === user?.name && (
                 <div className='ml-auto flex gap-4'>
-                  <EditIcon />
-                  <TrashIcon />
+                  <EditIcon id={props.id} />
+                  <TrashIcon id={props.id} title={props.title} />
                 </div>
               )}
             </div>
