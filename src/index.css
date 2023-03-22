@@ -8,6 +8,14 @@
   }
 }
 
+@layer base {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
 /* HERE  scroll bar styling */
 body::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(51, 60, 77, 0.3);
