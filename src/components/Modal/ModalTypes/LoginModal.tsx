@@ -22,6 +22,7 @@ const LoginModal = () => {
       <div className='card-body'>
         <h2 className='card-title'>Account Created!</h2>
         <p className='my-4'>Your account was created sucessfully, you will be redirected in {count}...</p>
+        <p className='mb-2 font-bold text-primary-focus'> Note: Remember to confirm your email to be able to login</p>
         <div className='card-actions justify-end'>
           <Link className='btn btn-primary' to='/login'>
             Login Now

@@ -3,10 +3,12 @@ import Input from '../components/Input';
 import useHttp from '../hook/use-http';
 import useInput from '../hook/use-input';
 import useBlogContext from '../hook/use-blogContext';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import ConfirmMessage from '../components/ConfirmMessage';
 
 const Login = () => {
   const { setUser } = useBlogContext();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const naviage = useNavigate();
   const location = useLocation();
@@ -38,6 +40,7 @@ const Login = () => {
     <div className='min-h-screen bg-base-100 flex justify-center items-center'>
       <div className='absolute w-60 h-60 rounded-xl bg-primary -top-5 -left-16 z-0 transform rotate-45 hidden md:block'></div>
       <div className='absolute w-48 h-48 rounded-xl bg-primary  right-6 bottom-10 transform rotate-12 hidden md:block'></div>
+      {searchParams.get('confirmed') === 'true' && <ConfirmMessage />}
       <form className='py-12 px-12 bg-white rounded-2xl shadow-xl z-20' onSubmit={loginHandler}>
         <div>
           <p className='text-rose-500 underline'>{loginMsg}</p>
