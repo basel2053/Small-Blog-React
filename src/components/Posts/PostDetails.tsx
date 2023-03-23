@@ -4,19 +4,31 @@ import { useEffect, useState } from 'react';
 import useAxiosPrivate from '../../hook/use-axiosPrivate';
 import { IPost } from '../../interface/post';
 import { baseURL } from '../../api/axios';
+import { IComment } from '../../interface/comment';
+import Comment from '../Comments/Comment';
+import AddComment from '../Comments/AddComment';
 
 const PostDetails = () => {
   const { id } = useParams();
   const privateHttp = useAxiosPrivate();
   const [post, setPost] = useState<IPost>();
+  const [comments, setComments] = useState<IComment[]>([]);
+
   useEffect(() => {
     const getPost = async () => {
       const { data } = await privateHttp.get(`posts/${id}`);
       setPost(data.post);
+      setComments(data.comments);
     };
     getPost();
   }, []);
 
+  const onAddComment = (comment: IComment) => {
+    setComments(prevComments => [...prevComments, comment]);
+  };
+  const onDeleteComment = (id: number) => {
+    setComments(prevComments => prevComments.filter(c => c.id !== id));
+  };
   return (
     <>
       <div className='absolute bg-neutral text-white font-medium clipped-note py-1 pr-10 pl-2 top-[16%]'>
@@ -36,6 +48,17 @@ const PostDetails = () => {
         </p>
         <PostAuthor author={post?.author} />
       </div>
+      <div className='w-3/4 h-5 border-b border-b-primary-focus  text-center mb-12 m-auto'>
+        <span className='text-3xl font-semibold text-gray-700 bg-white px-4'>Comments</span>
+      </div>
+      <ul className='flex flex-col items-center justify-center w-3/4 m-auto px-2 mb-8'>
+        {comments.length > 0 ? (
+          comments?.map(c => <Comment key={c.id} comment={c} onDelete={onDeleteComment} postAuthor={post?.author} />)
+        ) : (
+          <h2 className='mb-6 text-gray-700 font-medium text-xl'>Be the first to leave a comment..</h2>
+        )}
+        <AddComment postId={id} onAddComment={onAddComment} />
+      </ul>
     </>
   );
 };
