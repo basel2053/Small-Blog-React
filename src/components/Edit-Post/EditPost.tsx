@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import useAxiosPrivate from '../../hook/use-axiosPrivate';
 import SuccessScreen from '../SuccessScreen';
 import { useEffect, useState } from 'react';
+import Tiptap from '../Tiptap/Tiptap';
 
 interface IData {
   title: string;
@@ -120,6 +121,7 @@ const EditPost = () => {
         <p className='text-rose-500 mt-1'>{errors.description?.message}</p>
         <button className='btn btn-primary text-xl px-10 mt-4 text-white'>{id ? 'Edit Post' : 'Submit'}</button>
       </form>
+      <Tiptap />
     </>
   );
 };

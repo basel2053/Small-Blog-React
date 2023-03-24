@@ -36,6 +36,14 @@ const Comment = (props: { comment: IComment; onDelete: Function; postAuthor?: st
         )}
       </div>
       <p className='mt-4 mb-2 text-gray-700 text-lg'>{props.comment.body}</p>
+      {/* <form className='relative '>
+        <textarea
+          className='w-full text-gray-700 text-lg p-2 mt-2 border border-gray-400 rounded focus:outline-none'
+          autoFocus={true}
+          defaultValue={props.comment.body}
+        ></textarea>
+        <button className='btn btn-outline btn-primary absolute top-1/4 right-12 '>Edit</button>
+      </form> */}
     </li>
   );
 };

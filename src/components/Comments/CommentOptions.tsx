@@ -3,9 +3,14 @@ import EllipsisIcon from '../icons/EllipsisIcon';
 
 const CommentOptions = (props: { id?: number; onDelete: Function; isCommentAuthor: boolean }) => {
   const privateHttp = useAxiosPrivate();
+
   const deleteHandler = async () => {
     await privateHttp.delete(`comments/${props.id}`);
     props.onDelete(props.id);
+  };
+
+  const editHandler = () => {
+    console.log('heya edit');
   };
 
   return (
@@ -14,11 +19,13 @@ const CommentOptions = (props: { id?: number; onDelete: Function; isCommentAutho
         <EllipsisIcon />
       </label>
       <ul tabIndex={0} className='dropdown-content menu p-2 shadow bg-base-100 rounded-box w-36'>
-        {props.isCommentAuthor && (
+        {/* {props.isCommentAuthor && (
           <li className=' transition-colors hover:bg-primary '>
-            <button className='hover:text-white'>Edit</button>
+            <button className='hover:text-white' onClick={editHandler}>
+              Edit
+            </button>
           </li>
-        )}
+        )} */}
         <li className='transition-colors hover:bg-primary'>
           <button className='hover:text-white' onClick={deleteHandler}>
             Delete

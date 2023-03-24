@@ -1,0 +1,120 @@
+button.is-active {
+  background-color: rgb(197, 197, 197);
+  padding: 2px 3px;
+  border-radius: 2px;
+}
+
+/* HERE  Editor itself */
+.ProseMirror {
+  padding: 10px;
+  border-top: 1px solid grey;
+  background-color: white;
+  border-radius: 0 0 5px 5px;
+  min-height: 200px;
+}
+
+/* HERE  lists */
+.ProseMirror > * + * {
+  margin-top: 0.75em;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding: 0 1rem;
+}
+.ProseMirror ul {
+  list-style: disc;
+}
+.ProseMirror ol {
+  list-style: decimal;
+}
+
+/* HERE  headers */
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+  line-height: 1.1;
+  display: block;
+  font-weight: bold;
+  margin-left: 0;
+  margin-right: 0;
+}
+.ProseMirror h1 {
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+}
+.ProseMirror h2 {
+  font-size: 1.5em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+}
+.ProseMirror h3 {
+  font-size: 1.17em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.ProseMirror h4 {
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+}
+.ProseMirror h5 {
+  font-size: 0.83em;
+  margin-top: 1.67em;
+  margin-bottom: 1.67em;
+}
+.ProseMirror h6 {
+  font-size: 0.67em;
+  margin-top: 2.33em;
+  margin-bottom: 2.33em;
+}
+
+/* HERE  Code */
+.ProseMirror code {
+  background-color: #cfcfcf;
+  color: #616161;
+}
+
+.ProseMirror pre {
+  background: rgb(102, 204, 138);
+  color: #fff;
+  font-family: 'JetBrainsMono', monospace;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+.ProseMirror pre code {
+  color: inherit;
+  padding: 0;
+  background: none;
+  font-size: 0.8rem;
+}
+
+/* HERE  img */
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* HERE  quote */
+.ProseMirror blockquote {
+  padding-left: 1rem;
+  border-left: 2px solid #9c9c9c;
+}
+
+/* HERE  horizontal line */
+.ProseMirror hr {
+  border: none;
+  border-top: 2px solid #9c9c9c;
+  margin: 2rem 0;
+}
+
+/* HERE default for highlight */
+.ProseMirror mark {
+  background-color: #ffe066;
+  border-radius: 0.25em;
+  box-decoration-break: clone;
+  padding: 0.125em 0;
+}
