@@ -7,7 +7,6 @@ import Tiptap from '../Tiptap/Tiptap';
 
 interface IData {
   title: string;
-  description: string;
   image: any;
   field: string;
 }
@@ -30,6 +29,7 @@ const EditPost = () => {
   const privateHttp = useAxiosPrivate();
   const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(false);
+  const [text, setText] = useState({ content: '', length: 0 });
   const id = searchParams.get('edit');
   const {
     register,
@@ -42,7 +42,6 @@ const EditPost = () => {
       title: '',
       image: null,
       field: '',
-      description: '',
     },
   });
   useEffect(() => {
@@ -51,7 +50,7 @@ const EditPost = () => {
         const { data } = await privateHttp.get(`posts/${id}`);
         setValue('title', data.post.title);
         setValue('field', data.post.field);
-        setValue('description', data.post.description);
+        // setValue('description', data.post.description);
       };
       getPost();
     }
@@ -63,13 +62,15 @@ const EditPost = () => {
     formData.append('title', data.title);
     formData.append('field', data.field);
     if (data.image) formData.append('image', data.image[0]);
-    formData.append('description', data.description);
-    reset({ title: '', description: '' });
+    formData.append('description', text.content);
+    reset({ title: '' });
     id ? await privateHttp.patch(`posts/${id}`, formData) : await privateHttp.post(`posts`, formData);
     setTimeout(() => {
       navigate('/');
     }, 3500);
   };
+
+  console.log(text);
 
   return (
     <>
@@ -84,12 +85,12 @@ const EditPost = () => {
           })}
           type='text'
           placeholder='Post Title'
-          className='input input-bordered w-full max-w-xs 2xl:max-w-lg text-gray-600 mt-6'
+          className='input input-bordered w-full max-w-xs xl:max-w-5xl 2xl:max-w-6xl text-gray-600 mt-6'
         />
         <p className='text-rose-500 mt-1'>{errors.title?.message}</p>
         <select
           {...register('field', { required: 'Select one option' })}
-          className='select select-bordered w-full max-w-xs 2xl:max-w-lg mt-6'
+          className='select select-bordered w-full max-w-xs xl:max-w-5xl 2xl:max-w-6xl mt-6'
           defaultValue=''
         >
           <option disabled value=''>
@@ -107,21 +108,16 @@ const EditPost = () => {
             required: id ? false : 'This is required.',
           })}
           type='file'
-          className='file-input file-input-bordered file-input-primary w-full max-w-xs 2xl:max-w-lg mt-6'
+          className='file-input file-input-bordered file-input-primary w-full max-w-xs xl:max-w-5xl 2xl:max-w-6xl mt-6'
         />
         <p className='text-rose-500 mt-1'>{errors.image?.message}</p>
-        <textarea
-          {...register('description', {
-            required: 'This is required.',
-            minLength: { value: 16, message: 'Description should be at least 16 characters.' },
-          })}
-          placeholder='Post Description...'
-          className='textarea textarea-bordered textarea-lg w-full max-w-xs 2xl:max-w-lg min-h-[261px] text-gray-600 mt-6'
-        ></textarea>
-        <p className='text-rose-500 mt-1'>{errors.description?.message}</p>
-        <button className='btn btn-primary text-xl px-10 mt-4 text-white'>{id ? 'Edit Post' : 'Submit'}</button>
+
+        <Tiptap setText={setText} />
+        {/* <p className='text-rose-500 mt-1'>{errors.description?.message}</p>  */}
+        <button className='btn btn-primary text-xl px-10 mt-4 text-white' disabled={text.length < 50}>
+          {id ? 'Edit Post' : 'Submit'}
+        </button>
       </form>
-      <Tiptap />
     </>
   );
 };

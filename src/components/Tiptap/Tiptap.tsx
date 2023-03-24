@@ -6,6 +6,8 @@ import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
 import Highlight from '@tiptap/extension-highlight';
 import TextAlign from '@tiptap/extension-text-align';
+import Placeholder from '@tiptap/extension-placeholder';
+import Image from '@tiptap/extension-image';
 import { AiOutlineEnter, AiOutlineFontColors } from 'react-icons/ai';
 import {
   FaAlignCenter,
@@ -72,14 +74,6 @@ const MenuBar = ({ editor }) => {
           className={`text-lg m-2 mr-4 ${editor.isActive('strike') ? 'is-active' : ''}`}
         >
           <FaStrikethrough />
-        </button>
-        <button
-          type='button'
-          onClick={() => editor.chain().focus().toggleCode().run()}
-          disabled={!editor.can().chain().focus().toggleCode().run()}
-          className={`text-lg m-2 mr-4 ${editor.isActive('code') ? 'is-active' : ''}`}
-        >
-          <FaCode />
         </button>
         <button
           type='button'
@@ -169,18 +163,21 @@ const MenuBar = ({ editor }) => {
           <FaListOl />
         </button>
         <button
+          type='button'
           onClick={() => editor.chain().focus().setTextAlign('left').run()}
           className={`text-lg m-2 mr-4 ${editor.isActive({ textAlign: 'left' }) ? 'is-active' : ''}`}
         >
           <FaAlignLeft />
         </button>
         <button
+          type='button'
           onClick={() => editor.chain().focus().setTextAlign('center').run()}
           className={`text-lg m-2 mr-4 ${editor.isActive({ textAlign: 'center' }) ? 'is-active' : ''}`}
         >
           <FaAlignCenter />
         </button>
         <button
+          type='button'
           onClick={() => editor.chain().focus().setTextAlign('right').run()}
           className={`text-lg m-2 mr-4 ${editor.isActive({ textAlign: 'right' }) ? 'is-active' : ''}`}
         >
@@ -191,7 +188,7 @@ const MenuBar = ({ editor }) => {
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
           className={`text-lg m-2 mr-4 ${editor.isActive('codeBlock') ? 'is-active' : ''}`}
         >
-          <FaFileCode />
+          <FaCode />
         </button>
         <button
           type='button'
@@ -219,7 +216,7 @@ const MenuBar = ({ editor }) => {
           type='button'
           onClick={() => editor.chain().focus().undo().run()}
           disabled={!editor.can().chain().focus().undo().run()}
-          className='text-lg m-2 mr-4 '
+          className='text-lg m-2 mr-4 cursor-pointer'
         >
           <FaUndo />
         </button>
@@ -227,7 +224,7 @@ const MenuBar = ({ editor }) => {
           type='button'
           onClick={() => editor.chain().focus().redo().run()}
           disabled={!editor.can().chain().focus().redo().run()}
-          className='text-lg m-2 mr-4 '
+          className='text-lg m-2 mr-4 cursor-pointer'
         >
           <FaRedo />
         </button>
@@ -236,7 +233,7 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-const Tiptap = () => {
+const Tiptap = (props: { setText: React.Dispatch<React.SetStateAction<{ content: string; length: number }>> }) => {
   const editor = useEditor({
     extensions: [
       Color.configure({ types: [TextStyle.name, ListItem.name] }),
@@ -261,19 +258,20 @@ const Tiptap = () => {
         alignments: ['left', 'right', 'center'],
       }),
       Underline,
+      Placeholder,
+      Image,
     ],
     content: ``,
     onUpdate: ({ editor }) => {
-      // IMPORTANT  HERE  we get the input which we can store in the backend to be able to show the data again as we sent in front
-      // we can get it in different formats ex: json or HTML or ...
       // NOTE  we might need a package to parse the html in react or search for a way, IMPORTANT  adding the ProseMirror class to the output
-      const html = editor.getHTML();
-      console.log(html);
+      const length = editor.getText().length;
+      const content = editor.getHTML();
+      props.setText({ content, length });
     },
   });
 
   return (
-    <div className='text-editor border border-neutral rounded w-3/4 mb-10 m-auto'>
+    <div className='text-editor border border-[#D6D8DB] rounded w-full max-w-xs xl:max-w-5xl 2xl:max-w-6xl mt-6 mb-8'>
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
     </div>
