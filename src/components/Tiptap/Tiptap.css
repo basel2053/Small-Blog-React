@@ -66,7 +66,7 @@ button.is-active {
   background: rgb(102, 204, 138);
   color: #fff;
   font-family: 'JetBrainsMono', monospace;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 3rem 0.75rem 1rem;
   border-radius: 0.5rem;
   width: max-content;
 }

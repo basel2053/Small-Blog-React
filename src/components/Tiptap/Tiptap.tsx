@@ -267,17 +267,15 @@ const Tiptap = (props: {
       Image,
     ],
     content: ``,
-
+    onCreate: ({ editor }) => {
+      editor?.commands.setContent(props.content);
+    },
     onUpdate: ({ editor }) => {
       const length = editor.getText().length;
       const content = editor.getHTML();
       props.setText({ content, length });
     },
   });
-
-  useEffect(() => {
-    editor?.commands.setContent(props.content);
-  }, [props.content]);
 
   return (
     <div className='text-editor border border-[#D6D8DB] rounded w-full max-w-xs xl:max-w-5xl 2xl:max-w-6xl mt-6 mb-8'>

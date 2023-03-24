@@ -70,8 +70,6 @@ const EditPost = () => {
     }, 3500);
   };
 
-  console.log(text);
-
   return (
     <>
       {showSuccess && <SuccessScreen />}
@@ -112,7 +110,8 @@ const EditPost = () => {
         />
         <p className='text-rose-500 mt-1'>{errors.image?.message}</p>
 
-        <Tiptap setText={setText} content={text.content} />
+        {text.content && <Tiptap setText={setText} content={text.content} />}
+        {!text.content && <Tiptap setText={setText} content={''} />}
         {/* <p className='text-rose-500 mt-1'>{errors.description?.message}</p>  */}
         <button className='btn btn-primary text-xl px-10 mt-4 text-white' disabled={text.length < 50}>
           {id ? 'Edit Post' : 'Submit'}
