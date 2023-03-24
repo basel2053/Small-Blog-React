@@ -50,7 +50,7 @@ const EditPost = () => {
         const { data } = await privateHttp.get(`posts/${id}`);
         setValue('title', data.post.title);
         setValue('field', data.post.field);
-        // setValue('description', data.post.description);
+        setText({ content: data.post.description, length: 50 });
       };
       getPost();
     }
@@ -112,7 +112,7 @@ const EditPost = () => {
         />
         <p className='text-rose-500 mt-1'>{errors.image?.message}</p>
 
-        <Tiptap setText={setText} />
+        <Tiptap setText={setText} content={text.content} />
         {/* <p className='text-rose-500 mt-1'>{errors.description?.message}</p>  */}
         <button className='btn btn-primary text-xl px-10 mt-4 text-white' disabled={text.length < 50}>
           {id ? 'Edit Post' : 'Submit'}

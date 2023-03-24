@@ -34,6 +34,8 @@ import {
 
 import './Tiptap.css';
 
+import { useEffect } from 'react';
+
 // @ts-ignore
 const MenuBar = ({ editor }) => {
   if (!editor) {
@@ -233,7 +235,10 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-const Tiptap = (props: { setText: React.Dispatch<React.SetStateAction<{ content: string; length: number }>> }) => {
+const Tiptap = (props: {
+  setText: React.Dispatch<React.SetStateAction<{ content: string; length: number }>>;
+  content: string;
+}) => {
   const editor = useEditor({
     extensions: [
       Color.configure({ types: [TextStyle.name, ListItem.name] }),
@@ -262,13 +267,17 @@ const Tiptap = (props: { setText: React.Dispatch<React.SetStateAction<{ content:
       Image,
     ],
     content: ``,
+
     onUpdate: ({ editor }) => {
-      // NOTE  we might need a package to parse the html in react or search for a way, IMPORTANT  adding the ProseMirror class to the output
       const length = editor.getText().length;
       const content = editor.getHTML();
       props.setText({ content, length });
     },
   });
+
+  useEffect(() => {
+    editor?.commands.setContent(props.content);
+  }, [props.content]);
 
   return (
     <div className='text-editor border border-[#D6D8DB] rounded w-full max-w-xs xl:max-w-5xl 2xl:max-w-6xl mt-6 mb-8'>
