@@ -36,7 +36,11 @@ npm install
 
 This project was for React course in ITI. The project goals was to use the React knowledge acquired during the course to build a small blog, with authentication, and ability for users to share posts.
 
+I wanted to take this chance to enrich my React skills, beside the basic requirements. I wanted for users to be able to have the ability to leave comments, have profiles where others can see their published posts, and hope to add more features to the project such as chat, friendlist, and notifications.
 
+To implement this project, it all started wtih `vite`, and some awesome npm packages like `react-router-dom` for routing, `boring-avatars` for users avatars, `@react-oauth/google` Google OAuth2 , tiptap awesome text-editor, and some others.
+
+Finally, I had so much fun implementing this app, and hope to add more to it, and try some new cool stuff with React.
 
 ## Feedback
 
