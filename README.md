@@ -10,6 +10,10 @@ A small coding blog, where you can share posts and ideas, watching others profil
 
 ## Project Screen Shot(s)
 
+<img src="https://user-images.githubusercontent.com/77590428/227706666-70515c8a-80c1-41b6-a28f-1e0a1e8707ba.png" alt="Home" width="48%"/> <img src="https://user-images.githubusercontent.com/77590428/227706672-1f6433e2-3f9b-46c1-b728-0a570ce0c573.png" alt="Home" width="48%"/>
+<img src="https://user-images.githubusercontent.com/77590428/227706667-d8781224-c168-46e7-9343-7172be3e054b.png" alt="Home" width="48%"/> <img src="https://user-images.githubusercontent.com/77590428/227706680-6c2e0aa0-fbb6-43aa-984a-6f114e0b0f00.png" alt="Home" width="48%"/>
+
+
 ## Installation and Setup Instructions
 
 ## Reflection
