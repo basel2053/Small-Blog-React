@@ -16,6 +16,22 @@ A small coding blog, where you can share posts and ideas, watching others profil
 
 ## Installation and Setup Instructions
 
+#### 1)  Clone the repository, install npm packages.
+
+``` 
+//on local
+git clone https://github.com/basel2053/Small-Blog-React
+cd Small-Blog-React
+npm install
+```
+#### 2)  Start the application.
+
+`npm run dev`
+
+#### 3)  Visit the app.
+
+`localhost:5173/`
+
 ## Reflection
 
 ## Feedback
