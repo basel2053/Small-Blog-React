@@ -8,6 +8,12 @@ A small coding blog, where you can share posts and ideas, watching others profil
 - [React](https://react.dev/) - Front-End JavaScript Library
 - [TypeScript](https://www.typescriptlang.org/) - Superset of Javascript
 
+## Project Screen Shot(s)
+
+## Installation and Setup Instructions
+
+## Reflection
+
 ## Feedback
 
 If you have any feedback, please reach out to me at baselsalah2053@gmail.com
