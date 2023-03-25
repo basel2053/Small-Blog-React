@@ -34,6 +34,10 @@ npm install
 
 ## Reflection
 
+This project was for React course in ITI. The project goals was to use the React knowledge acquired during the course to build a small blog, with authentication, and ability for users to share posts.
+
+
+
 ## Feedback
 
 If you have any feedback, please reach out to me at baselsalah2053@gmail.com
