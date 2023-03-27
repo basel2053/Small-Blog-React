@@ -3,6 +3,7 @@ import Input from '../components/Input';
 import useInput from '../hook/use-input';
 import useHttp from '../hook/use-http';
 import CheckIcon from '../components/icons/CheckIcon';
+import { IValidationError } from '../interface/validationError';
 
 const Forgot = () => {
   const emailInput = useInput((val: string) => val.includes('@') && val.length > 4);

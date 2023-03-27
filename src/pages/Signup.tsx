@@ -6,6 +6,7 @@ import useHttp from '../hook/use-http';
 import React, { useState } from 'react';
 import Modal from '../components/Modal/Modal';
 import LoginModal from '../components/Modal/ModalTypes/LoginModal';
+import { IValidationError } from '../interface/validationError';
 
 const Signup = () => {
   const [submitMsg, setSubmitMsg] = useState('');
