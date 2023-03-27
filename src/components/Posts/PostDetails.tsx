@@ -32,10 +32,10 @@ const PostDetails = () => {
   };
   return (
     <>
-      <div className='absolute bg-neutral text-white font-medium clipped-note py-1 pr-10 pl-2 top-[16%]'>
+      <div className='absolute bg-neutral text-white font-medium clipped-note py-1 pr-10 pl-2 hidden sm:block sm:top-[20%] lg:top-[16%]'>
         <h4>{post?.readtime} minutes</h4>
       </div>
-      <div className='mx-16 my-10 flex flex-col items-center'>
+      <div className='mx-4  sm:mx-8 md:mx-16 my-10 flex flex-col items-center'>
         <h2 className='text-center text-4xl mb-4'>
           {post?.title} <span className='text-gray-600 text-3xl'>|</span>
           <span className=' text-3xl text-primary-focus uppercase'> {post?.field}</span>
@@ -44,15 +44,15 @@ const PostDetails = () => {
         <div className='text-center  mb-10 pb-4'>
           <img src={post?.image && `${baseURL}${post?.image}`} alt={post?.title} className='rounded inline-block' />
         </div>
-        <div className='w-3/4 text-gray-600 mb-10 text-xl bg-transparent border-t-0 ProseMirror'>
+        <div className='w-full lg:w-3/4 text-gray-600 mb-10 text-xl bg-transparent border-t-0 ProseMirror'>
           {parse(post?.description + '')}
         </div>
         <PostAuthor author={post?.author} />
       </div>
-      <div className='w-3/4 h-5 border-b border-b-primary-focus  text-center mb-12 m-auto'>
+      <div className='w-11/12 lg:w-3/4 h-5 border-b border-b-primary-focus  text-center mb-12 m-auto'>
         <span className='text-3xl font-semibold text-gray-700 bg-white px-4'>Comments</span>
       </div>
-      <ul className='flex flex-col items-center justify-center w-3/4 m-auto px-2 mb-8'>
+      <ul className='flex flex-col items-center justify-center w-11/12 lg:w-3/4 m-auto px-2 mb-8'>
         {comments.length > 0 ? (
           comments?.map(c => <Comment key={c.id} comment={c} onDelete={onDeleteComment} postAuthor={post?.author} />)
         ) : (

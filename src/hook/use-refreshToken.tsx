@@ -7,7 +7,7 @@ const useRefreshToken = () => {
 
   const refresh = async () => {
     const { data, errors } = await useHttp('token/refresh', 'GET');
-    setUser((prev: Partial<IUser> | undefined) => ({ name: data?.name, accessToken: data?.accessToken }));
+    setUser((prev: Partial<IUser> | undefined) => ({ name: data?.name, id: data?.id, accessToken: data?.accessToken }));
     return data?.accessToken;
   };
   return refresh;

@@ -1,32 +1,72 @@
 import { useParams } from 'react-router-dom';
 import ProfilePicture from './ProfilePicture';
 import useAxiosPrivate from '../../hook/use-axiosPrivate';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PostWrapper from '../Posts/PostWrapper';
 import useBlogContext from '../../hook/use-blogContext';
+import AirplaneIcon from '../icons/AirplaneIcon';
+import PenIcon from '../icons/PenIcon';
 
 const Profile = () => {
   const { author } = useParams();
   const privateHttp = useAxiosPrivate();
-  const { posts, setPosts } = useBlogContext();
+  const { posts, setPosts, user } = useBlogContext();
+  const [isEditing, setIsEditing] = useState(false);
+  const [bio, setBio] = useState('');
 
   useEffect(() => {
     const getPost = async () => {
       const { data } = await privateHttp.get(`users/${author}`);
       setPosts(data.posts);
+      setBio(data.author.bio);
     };
     getPost();
   }, [author]);
+
+  const editBioHandler = () => {
+    setIsEditing(true);
+  };
+
+  const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setBio(e.target.value);
+  };
+
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await privateHttp.patch(`users/${user?.id}`, { bio });
+    setIsEditing(false);
+  };
 
   return (
     <>
       <div className='m-auto border-2 rounded-xl shadow-md w-11/12 sm:w-2/3 md:w-1/2 xl:w-1/3 text-center my-10'>
         <ProfilePicture size={200} author={author} />
         <h1 className='text-3xl capitalize font-bold mb-6'>{author}</h1>
-        <p className='text-gray-500 mb-6 leading-6 px-4'>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis nesciunt animi fugit vitae. Ratione,
-          ullam.
-        </p>
+        {!isEditing ? (
+          <p className='text-gray-500 mb-6 leading-6 px-4'>
+            {bio
+              ? bio
+              : `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis nesciunt animi fugit vitae. Ratione,
+            ullam.`}
+            {user?.name === author && (
+              <button onClick={editBioHandler}>
+                <PenIcon />
+              </button>
+            )}
+          </p>
+        ) : (
+          <form className='relative' onSubmit={submitHandler}>
+            <textarea
+              rows={4}
+              className='block p-2.5 w-11/12 m-auto text-sm text-gray-600 rounded-md border mb-4 border-gray-300 focus:ring-primary focus:border-primary focus:outline-none'
+              placeholder='Write your thoughts here...'
+              onChange={changeHandler}
+              value={bio}
+            ></textarea>
+            <AirplaneIcon bpos={'bottom-12'} />
+          </form>
+        )}
+
         <button className='btn gap-2 btn-primary text-white mb-6'>
           Connect
           <svg
@@ -45,7 +85,7 @@ const Profile = () => {
           </svg>
         </button>
       </div>
-      <div className='mx-14'>
+      <div className='mx-6 sm:mx-14'>
         <hr className='mb-6' />
         <h2 className='text-3xl  font-bold mb-6'>
           Lastest Posts by <span className='capitalize'>{author}</span>

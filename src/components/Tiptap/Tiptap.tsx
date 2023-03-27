@@ -43,7 +43,7 @@ const MenuBar = ({ editor }) => {
   }
 
   return (
-    <div className='py-2 px-4 flex items-center justify-between'>
+    <div className='py-2 px-4 flex items-center justify-between gap-10 xl:gap-0'>
       <div>
         <button
           type='button'
@@ -278,7 +278,7 @@ const Tiptap = (props: {
   });
 
   return (
-    <div className='text-editor border border-[#D6D8DB] rounded w-full max-w-xs xl:max-w-5xl 2xl:max-w-6xl mt-6 mb-8'>
+    <div className='text-editor border border-[#D6D8DB] rounded w-11/12 md:w-3/4 xl:max-w-5xl 2xl:max-w-6xl mt-6 mb-8'>
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
     </div>

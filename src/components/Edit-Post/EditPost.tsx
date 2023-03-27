@@ -67,56 +67,61 @@ const EditPost = () => {
     id ? await privateHttp.patch(`posts/${id}`, formData) : await privateHttp.post(`posts`, formData);
     setTimeout(() => {
       navigate('/');
-    }, 3500);
+    }, 3000);
   };
 
   return (
     <>
-      {showSuccess && <SuccessScreen />}
-      <h1 className='text-center text-4xl font-bold mt-10'>{id ? 'Got a change!' : 'Share your thoughts'}</h1>
-      <form className='my-10 w-3/4 m-auto flex flex-col items-center' onSubmit={handleSubmit(onSubmit)}>
-        <input
-          {...register('title', {
-            required: 'This is required.',
-            minLength: { value: 3, message: 'Title should be at least 3 characters.' },
-            maxLength: { value: 50, message: 'Title should be at most 50 characters.' },
-          })}
-          type='text'
-          placeholder='Post Title'
-          className='input input-bordered w-full max-w-xs xl:max-w-5xl 2xl:max-w-6xl text-gray-600 mt-6'
-        />
-        <p className='text-rose-500 mt-1'>{errors.title?.message}</p>
-        <select
-          {...register('field', { required: 'Select one option' })}
-          className='select select-bordered w-full max-w-xs xl:max-w-5xl 2xl:max-w-6xl mt-6'
-          defaultValue=''
-        >
-          <option disabled value=''>
-            Choose Programming Field
-          </option>
-          {fields.map(f => (
-            <option key={f} value={f}>
-              {f}
-            </option>
-          ))}
-        </select>
-        <p className='text-rose-500 mt-1'>{errors.field?.message}</p>
-        <input
-          {...register('image', {
-            required: id ? false : 'This is required.',
-          })}
-          type='file'
-          className='file-input file-input-bordered file-input-primary w-full max-w-xs xl:max-w-5xl 2xl:max-w-6xl mt-6'
-        />
-        <p className='text-rose-500 mt-1'>{errors.image?.message}</p>
+      {showSuccess ? (
+        <SuccessScreen />
+      ) : (
+        <>
+          <h1 className='text-center text-4xl font-bold mt-10'>{id ? 'Got a change!' : 'Share your thoughts'}</h1>
+          <form className='my-10  m-auto flex flex-col items-center' onSubmit={handleSubmit(onSubmit)}>
+            <input
+              {...register('title', {
+                required: 'This is required.',
+                minLength: { value: 3, message: 'Title should be at least 3 characters.' },
+                maxLength: { value: 50, message: 'Title should be at most 50 characters.' },
+              })}
+              type='text'
+              placeholder='Post Title'
+              className='input input-bordered w-11/12 md:w-3/4 xl:max-w-5xl 2xl:max-w-6xl text-gray-600 mt-6'
+            />
+            <p className='text-rose-500 mt-1'>{errors.title?.message}</p>
+            <select
+              {...register('field', { required: 'Select one option' })}
+              className='select select-bordered w-11/12 md:w-3/4 xl:max-w-5xl 2xl:max-w-6xl mt-6'
+              defaultValue=''
+            >
+              <option disabled value=''>
+                Choose Programming Field
+              </option>
+              {fields.map(f => (
+                <option key={f} value={f}>
+                  {f}
+                </option>
+              ))}
+            </select>
+            <p className='text-rose-500 mt-1'>{errors.field?.message}</p>
+            <input
+              {...register('image', {
+                required: id ? false : 'This is required.',
+              })}
+              type='file'
+              className='file-input file-input-bordered file-input-primary w-11/12 md:w-3/4 xl:max-w-5xl 2xl:max-w-6xl mt-6'
+            />
+            <p className='text-rose-500 mt-1'>{errors.image?.message}</p>
 
-        {text.content && <Tiptap setText={setText} content={text.content} />}
-        {!text.content && <Tiptap setText={setText} content={''} />}
-        {/* <p className='text-rose-500 mt-1'>{errors.description?.message}</p>  */}
-        <button className='btn btn-primary text-xl px-10 mt-4 text-white' disabled={text.length < 50}>
-          {id ? 'Edit Post' : 'Submit'}
-        </button>
-      </form>
+            {text.content && <Tiptap setText={setText} content={text.content} />}
+            {!text.content && <Tiptap setText={setText} content={''} />}
+            {/* <p className='text-rose-500 mt-1'>{errors.description?.message}</p>  */}
+            <button className='btn btn-primary text-xl px-10 mt-4 text-white' disabled={text.length < 50}>
+              {id ? 'Edit Post' : 'Submit'}
+            </button>
+          </form>
+        </>
+      )}
     </>
   );
 };

@@ -29,7 +29,7 @@ const AddComment = (props: { postId?: string; onAddComment: Function }) => {
         value={comment}
         onChange={changeHandler}
       ></textarea>
-      <AirplaneIcon isValid={comment.trim().length > 0} />
+      <AirplaneIcon isValid={comment.trim().length > 0} bpos={'bottom-16'} />
     </form>
   );
 };
