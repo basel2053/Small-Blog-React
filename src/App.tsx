@@ -32,9 +32,6 @@ const App = () => {
       <Route path='/forgot' element={<Forgot />} />
       <Route path='/reset' element={<Reset />} />
       <Route path='*' element={<Error404 />} />
-
-      {/* HERE  put our protected routes  inside presistenceLogin and requireAuth*/}
-      {/* <Route element={<PresistenceLogin />}></Route> */}
     </Routes>
   );
 };

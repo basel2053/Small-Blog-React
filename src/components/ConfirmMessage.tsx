@@ -1,6 +1,6 @@
 const ConfirmMessage = () => {
   return (
-    <div className='absolute top-[15%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 '>
+    <div className='absolute top-[10%] w-11/12 sm:w-3/4 md:w-1/2 left-1/2 lg:w-1/3 2xl:max-w-max -translate-x-1/2 -translate-y-1/2 z-10'>
       <div className='alert  alert-success text-white shadow-lg '>
         <div>
           <svg

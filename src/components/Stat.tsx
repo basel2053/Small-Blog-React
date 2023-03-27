@@ -1,7 +1,7 @@
 const Stat = (props: { postsCount: number }) => {
   return (
-    <div className='stats shadow mb-4'>
-      <div className='stat'>
+    <div className='stats shadow mb-4 flex flex-col sm:flex-row'>
+      <div className='stat border-b sm:border-b-0'>
         <div className='stat-figure text-primary'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -18,7 +18,9 @@ const Stat = (props: { postsCount: number }) => {
           </svg>
         </div>
         <div className='stat-title'>Total Posts</div>
-        <div className='stat-value text-primary'>{props.postsCount}.0K</div>
+        <div className='stat-value text-primary'>
+          {Intl.NumberFormat('en', { notation: 'compact' }).format(props.postsCount)}
+        </div>
         <div className='stat-desc'>14% more than last month</div>
       </div>
 

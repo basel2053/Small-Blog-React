@@ -11,7 +11,7 @@ const Navbar = (props: { user?: string }) => {
   };
 
   return (
-    <div className='navbar bg-primary text-white px-14'>
+    <div className='navbar bg-primary text-white px-5 sm:px-8 lg:px-10 2xl:px-16'>
       <div className='flex-1'>
         <Link to='/' className='btn btn-ghost normal-case text-xl'>
           Beanzo

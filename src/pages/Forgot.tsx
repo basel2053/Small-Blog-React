@@ -57,7 +57,7 @@ const Forgot = () => {
           </div>
         </form>
       ) : (
-        <div className='w-1/2 h-1/4 bg-white shadow-md rounded-md flex flex-col items-center'>
+        <div className='w-5/6 h-1/4 bg-white shadow-md rounded-md flex flex-col items-center sm:w-3/4 md:w-1/2'>
           <CheckIcon />
           <h2 className='text-2xl font-semibold mt-6 mb-2'>An E-mail has been sent!</h2>
           <p className='mb-10 text-gray-600'>Please check your email..</p>

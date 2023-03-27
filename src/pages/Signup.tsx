@@ -42,9 +42,9 @@ const Signup = () => {
 
   return (
     <>
-      <div className='bg-white relative lg:py-20'>
+      <div className='bg-white relative lg:py-5 2xl:py-20'>
         <div
-          className='flex flex-col items-center justify-between pt-0 pr-4 pb-0 pl-4 mt-0 mr-auto mb-0 ml-auto max-w-7xl
+          className='flex flex-col items-center justify-between pt-0 pr-2 pb-0 pl-2 mt-0 mr-auto mb-0 ml-auto max-w-7xl
       xl:px-5 lg:flex-row sm:pl-10 sm:pr-10'
         >
           <div className='flex flex-col items-center w-full pt-5 pr-4 pb-20 pl-4 lg:pt-20 lg:flex-row sm:pl-10 sm:pr-10'>
@@ -53,7 +53,7 @@ const Signup = () => {
                 <img src='/Run_-_Health_qcghbu.png' className='btn-' />
               </div>
             </div>
-            <div className='w-full mt-20 mr-0 mb-0 ml-0 relative z-10 max-w-2xl lg:mt-0 lg:w-5/12'>
+            <div className='w-full mt-10  mr-0 mb-0 ml-0 relative z-10 max-w-2xl sm:mt-20 lg:mt-0 lg:w-5/12'>
               <div
                 className='flex flex-col items-start justify-start pt-10 pr-4 pb-10 pl-4 bg-white shadow-2xl rounded-xl
               relative z-10 sm:pl-10 sm:pr-10'
@@ -130,7 +130,7 @@ const Signup = () => {
                 </form>
               </div>
               <Square className='top-0 left-0 -mt-12 -ml-12 text-yellow-300' />
-              <Square className='bottom-0 right-0 -mb-12 -mr-12 text-primary' />
+              <Square className='bottom-0 right-0 -mb-12 -mr-12 text-primary hidden sm:block' />
             </div>
           </div>
         </div>
