@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import useRefreshToken from '../hook/use-refreshToken';
 import useAuth from '../hook/use-blogContext';
 import { Outlet } from 'react-router-dom';
-import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
 
 const PresistenceLogin = () => {
   const [isLoading, setIsLoading] = useState(true);

@@ -13,7 +13,7 @@ const Profile = () => {
   useEffect(() => {
     const getPost = async () => {
       const { data } = await privateHttp.get(`users/${author}`);
-      setPosts(data.author);
+      setPosts(data.posts);
     };
     getPost();
   }, [author]);

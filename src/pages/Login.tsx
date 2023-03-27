@@ -6,12 +6,13 @@ import useBlogContext from '../hook/use-blogContext';
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import ConfirmMessage from '../components/ConfirmMessage';
 import { useGoogleLogin } from '@react-oauth/google';
+import GoogleButton from '../components/GoogleButton';
 
 const Login = () => {
   const { setUser } = useBlogContext();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const naviage = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   // ! from will give us where the user came from instead of just navigating them to the home page
   const from = location.state?.from.pathname || '/';
@@ -34,7 +35,7 @@ const Login = () => {
       setLoginMsg(`Error: ${(errors as IValidationError).msg || errors}`);
     } else {
       setUser(data);
-      naviage(from, { replace: true });
+      navigate(from, { replace: true });
     }
   };
 
@@ -43,7 +44,7 @@ const Login = () => {
     onSuccess: async ({ code }) => {
       const { data } = await useHttp('users/oauth2/google', 'POST', { code });
       setUser(data);
-      naviage(from, { replace: true });
+      navigate(from, { replace: true });
     },
     onError: errorResponse => console.log(errorResponse),
   });
@@ -88,7 +89,7 @@ const Login = () => {
           )}
         </div>
         <div className='text-center mt-6'>
-          <button
+          {/* <button
             onClick={googleLogin}
             type='button'
             className='text-white bg-primary hover:bg-primary/90 focus:ring-4 focus:outline-none focus:ring-primary/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-primary/55 mr-2 mb-6'
@@ -109,7 +110,8 @@ const Login = () => {
               ></path>
             </svg>
             Sign in with Google 🚀
-          </button>
+          </button> */}
+          <GoogleButton loginHandler={googleLogin} />
           <button
             className='py-3 w-full text-xl text-white cursor-pointer bg-primary rounded-lg transition-colors hover:bg-primary-focus disabled:cursor-default disabled:bg-primary disabled:bg-opacity-80'
             disabled={!formIsValid}
