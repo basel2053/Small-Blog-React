@@ -1,4 +1,4 @@
-interface IValidationError {
+export interface IValidationError {
   value: string;
   msg: string;
   param?: string;
