@@ -7,7 +7,6 @@ import Underline from '@tiptap/extension-underline';
 import Highlight from '@tiptap/extension-highlight';
 import TextAlign from '@tiptap/extension-text-align';
 import Placeholder from '@tiptap/extension-placeholder';
-import Image from '@tiptap/extension-image';
 import { AiOutlineEnter, AiOutlineFontColors } from 'react-icons/ai';
 import {
   FaAlignCenter,
@@ -264,7 +263,6 @@ const Tiptap = (props: {
       }),
       Underline,
       Placeholder,
-      Image,
     ],
     content: ``,
     onCreate: ({ editor }) => {

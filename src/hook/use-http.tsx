@@ -2,7 +2,8 @@ import axios, { AxiosError } from 'axios';
 
 type httpMethods = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
-const baseURL = 'http://localhost:3000/';
+// const baseURL = 'http://localhost:3000/';
+const baseURL = 'https://small-blog-api.onrender.com/';
 
 const useHttp = async (path: string, method: httpMethods, body?: object, headers?: object) => {
   let errors: object | undefined, data: any;
