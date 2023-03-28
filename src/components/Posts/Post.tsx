@@ -62,9 +62,7 @@ const Post = (props: IPost) => {
         </div>
         <hr className='border-gray-300' />
         <p className='flex flex-row flex-wrap w-full px-4 py-2 overflow-hidden text-sm text-justify text-gray-700'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, magni fugiat, odit incidunt necessitatibus aut
-          nesciunt exercitationem aliquam id voluptatibus quisquam maiores officia sit amet accusantium aliquid quo
-          obcaecati quasi.
+          {`${props.description}...`}
         </p>
         <hr className='border-gray-300' />
         <section className='px-4 py-2 mt-2'>

@@ -15,7 +15,6 @@ import {
   FaBold,
   FaCode,
   FaEraser,
-  FaFileCode,
   FaHeading,
   FaHighlighter,
   FaItalic,
@@ -235,7 +234,7 @@ const MenuBar = ({ editor }) => {
 };
 
 const Tiptap = (props: {
-  setText: React.Dispatch<React.SetStateAction<{ content: string; length: number }>>;
+  setContent: React.Dispatch<React.SetStateAction<{ html: string; text: string }>>;
   content: string;
 }) => {
   const editor = useEditor({
@@ -269,9 +268,9 @@ const Tiptap = (props: {
       editor?.commands.setContent(props.content);
     },
     onUpdate: ({ editor }) => {
-      const length = editor.getText().length;
-      const content = editor.getHTML();
-      props.setText({ content, length });
+      const text = editor.getText();
+      const html = editor.getHTML();
+      props.setContent({ html, text });
     },
   });
 

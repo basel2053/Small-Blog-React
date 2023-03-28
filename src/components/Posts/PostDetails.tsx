@@ -45,7 +45,7 @@ const PostDetails = () => {
           <img src={post?.image && `${baseURL}${post?.image}`} alt={post?.title} className='rounded inline-block' />
         </div>
         <div className='w-full lg:w-3/4 text-gray-600 mb-10 text-xl bg-transparent border-t-0 ProseMirror'>
-          {parse(post?.description + '')}
+          {parse(post?.html + '')}
         </div>
         <PostAuthor author={post?.author} />
       </div>

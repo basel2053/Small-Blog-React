@@ -7,7 +7,7 @@ const Search = () => {
 
   useEffect(() => {
     const id = setTimeout(() => {
-      query ? setSearchParams({ query }) : setSearchParams();
+      query ? setSearchParams({ query }) : '';
     }, 500);
     return () => {
       clearTimeout(id);

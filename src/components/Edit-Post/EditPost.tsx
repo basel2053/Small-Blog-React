@@ -29,7 +29,7 @@ const EditPost = () => {
   const privateHttp = useAxiosPrivate();
   const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(false);
-  const [text, setText] = useState({ content: '', length: 0 });
+  const [content, setContent] = useState({ html: '', text: '' });
   const id = searchParams.get('edit');
   const {
     register,
@@ -50,7 +50,7 @@ const EditPost = () => {
         const { data } = await privateHttp.get(`posts/${id}`);
         setValue('title', data.post.title);
         setValue('field', data.post.field);
-        setText({ content: data.post.description, length: 50 });
+        setContent({ html: data.post.html, text: '' });
       };
       getPost();
     }
@@ -62,7 +62,8 @@ const EditPost = () => {
     formData.append('title', data.title);
     formData.append('field', data.field);
     if (data.image) formData.append('image', data.image[0]);
-    formData.append('description', text.content);
+    formData.append('description', content.text.substring(0, 240));
+    formData.append('html', content.html);
     reset({ title: '' });
     id ? await privateHttp.patch(`posts/${id}`, formData) : await privateHttp.post(`posts`, formData);
     setTimeout(() => {
@@ -113,10 +114,10 @@ const EditPost = () => {
             />
             <p className='text-rose-500 mt-1'>{errors.image?.message}</p>
 
-            {text.content && <Tiptap setText={setText} content={text.content} />}
-            {!text.content && <Tiptap setText={setText} content={''} />}
+            {content.html && <Tiptap setContent={setContent} content={content.html} />}
+            {!content.html && <Tiptap setContent={setContent} content={''} />}
             {/* <p className='text-rose-500 mt-1'>{errors.description?.message}</p>  */}
-            <button className='btn btn-primary text-xl px-10 mt-4 text-white' disabled={text.length < 50}>
+            <button className='btn btn-primary text-xl px-10 mt-4 text-white' disabled={content.text.length <= 85}>
               {id ? 'Edit Post' : 'Submit'}
             </button>
           </form>
