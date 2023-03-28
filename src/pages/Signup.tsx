@@ -7,8 +7,13 @@ import React, { useState } from 'react';
 import Modal from '../components/Modal/Modal';
 import LoginModal from '../components/Modal/ModalTypes/LoginModal';
 import { IValidationError } from '../interface/validationError';
+import GoogleButton from '../components/GoogleButton';
+import { useGoogleLogin } from '@react-oauth/google';
+import useBlogContext from '../hook/use-blogContext';
 
 const Signup = () => {
+  const { setUser } = useBlogContext();
+
   const [submitMsg, setSubmitMsg] = useState('');
   const [showModal, setShowModal] = useState(false);
   const emailInput = useInput((val: string) => val.includes('@') && val.length > 4);
@@ -40,6 +45,16 @@ const Signup = () => {
       }, 4000);
     }
   };
+
+  const googleLogin = useGoogleLogin({
+    flow: 'auth-code',
+    onSuccess: async ({ code }) => {
+      const { data } = await useHttp('users/oauth2/google', 'POST', { code });
+      setUser(data);
+      navigate('/', { replace: true });
+    },
+    onError: errorResponse => console.log(errorResponse),
+  });
 
   return (
     <>
@@ -120,6 +135,7 @@ const Signup = () => {
                     already have an account?
                   </Link>
                   <div className='relative'>
+                    <GoogleButton loginHandler={googleLogin} register={true} />
                     <button
                       className='w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center cursor-pointer text-white bg-primary
                   rounded-lg transition duration-200 hover:bg-primary-focus disabled:bg-primary disabled:bg-opacity-70 disabled:cursor-default'

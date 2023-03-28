@@ -7,17 +7,14 @@ const RequireAuth = () => {
   const { user } = useBlogContext();
   const location = useLocation();
 
-  return (
-    // ? protects all the childs component nested inside of it, IMPORTANT  we could also check for roles (pass it as parameter), maybe navigate to unauthorized page also
-    user?.accessToken ? (
-      <>
-        <Navbar user={user?.name} />
-        <Outlet />
-        <Footer />
-      </>
-    ) : (
-      <Navigate to='/login' state={{ from: location }} replace />
-    )
+  return user?.accessToken ? (
+    <>
+      <Navbar user={user?.name} />
+      <Outlet />
+      <Footer />
+    </>
+  ) : (
+    <Navigate to='/login' state={{ from: location }} replace />
   );
 };
 

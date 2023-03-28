@@ -1,7 +1,7 @@
-const GoogleButton = (props: { loginHandler: React.MouseEventHandler<HTMLDivElement> }) => {
+const GoogleButton = (props: { loginHandler: React.MouseEventHandler<HTMLDivElement>; register?: boolean }) => {
   return (
     <div
-      className='max-w-xs h-11 bg-[#4285f4] rounded mb-3 cursor-pointer shadow hover:shadow-[ 0 0 6px #4285f4] active:bg-[#1669F2]'
+      className='w-full h-11 bg-[#4285f4] rounded mb-3 cursor-pointer shadow hover:shadow-[ 0 0 6px #4285f4] active:bg-[#1669F2]'
       onClick={props.loginHandler}
     >
       <div className=' absolute mt-[1px] ml-[1px] h-[42px] w-11 rounded bg-white'>
@@ -10,8 +10,8 @@ const GoogleButton = (props: { loginHandler: React.MouseEventHandler<HTMLDivElem
           src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'
         />
       </div>
-      <p className=' pt-2 text-white '>
-        <b>Sign in with google</b>
+      <p className=' pt-2 text-white text-center'>
+        <b>{props.register ? 'Sign up' : 'Sign in'} with google</b>
       </p>
     </div>
   );
