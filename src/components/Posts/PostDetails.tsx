@@ -4,7 +4,6 @@ import PostAuthor from './PostAuthor';
 import { useEffect, useState } from 'react';
 import useAxiosPrivate from '../../hook/use-axiosPrivate';
 import { IPost } from '../../interface/post';
-import { baseURL } from '../../api/axios';
 import { IComment } from '../../interface/comment';
 import Comment from '../Comments/Comment';
 import AddComment from '../Comments/AddComment';
@@ -42,7 +41,7 @@ const PostDetails = () => {
         </h2>
         <h4 className='text-center text-gray-400 mb-10'>{post?.createdat}</h4>
         <div className='text-center  mb-10 pb-4'>
-          <img src={post?.image && `${baseURL}${post?.image}`} alt={post?.title} className='rounded inline-block' />
+          <img src={post?.image && `${post?.image}`} alt={post?.title} className='rounded inline-block' />
         </div>
         <div className='w-full lg:w-3/4 text-gray-600 mb-10 text-xl bg-transparent border-t-0 ProseMirror'>
           {parse(post?.html + '')}

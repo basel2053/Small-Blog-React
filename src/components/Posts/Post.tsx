@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { IPost } from '../../interface/post';
-import { baseURL } from '../../api/axios';
 import EditIcon from '../icons/EditIcon';
 import TrashIcon from '../icons/TrashIcon';
 import useBlogContext from '../../hook/use-blogContext';
@@ -27,7 +26,7 @@ const Post = (props: IPost) => {
       <div className='flex flex-col items-stretch min-h-full pb-4 mb-6 transition-all duration-150 bg-white rounded-lg shadow-lg hover:shadow-2xl'>
         <div className='md:flex-shrink-0'>
           <img
-            src={`${baseURL}${props.image}`}
+            src={`${props.image}`}
             alt={props.title}
             className='object-fill w-full rounded-lg rounded-b-none md:h-56'
           />
