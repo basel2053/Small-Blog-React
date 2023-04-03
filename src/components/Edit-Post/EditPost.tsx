@@ -50,7 +50,7 @@ const EditPost = () => {
         const { data } = await privateHttp.get(`posts/${id}`);
         setValue('title', data.post.title);
         setValue('field', data.post.field);
-        setContent({ html: data.post.html, text: '' });
+        setContent({ html: data.post.html, text: data.post.description });
       };
       getPost();
     }

@@ -4,10 +4,15 @@ import { useSearchParams } from 'react-router-dom';
 const Search = () => {
   const [query, setQuery] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
+  const [firstRender, setFirderRender] = useState(true);
 
   useEffect(() => {
+    if (firstRender) {
+      setFirderRender(false);
+      return;
+    }
     const id = setTimeout(() => {
-      query ? setSearchParams({ query }) : '';
+      query ? setSearchParams({ query }) : setSearchParams();
     }, 500);
     return () => {
       clearTimeout(id);
